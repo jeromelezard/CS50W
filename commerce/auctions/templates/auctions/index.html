@@ -1,0 +1,48 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>{{ page_title }}</h2>
+    
+        {% if profile %}
+        {% if request.user == userPage %}
+        <div class="choice">
+            <p class="options"><a href="{% url 'user' request.user.id %}">{% if my_listings %}<u>{% endif %}My listings</a></p></u>
+            <p class="options"><a href="{% url 'owned' request.user.id %}">{% if my_owned %}<u>{% endif %}Owned items</a></p></u>
+        </div>
+        {% else %}
+        <div class="choice">
+            <h1>{{ userPage }}'s Listings</h1>
+        </div>
+                {%endif%}
+        {% endif %}
+   
+    {% for listing in listings %}
+        
+            {% if listing.active == False and index %}
+                <!-- continue -->
+            {% else %}
+            {% if listing.active == False and category %}
+                <!-- continue -->
+            {% else %}
+            <div class="list_container">
+                <div class="imageContainer">
+                <img class="tableImage" id="{{listing.id}}" src="{{ listing.url}}" onerror="changeSrc('{{listing.id}}')">
+                </div>
+                <div class="list_container__text">
+                    <h1><a href="{% url 'listing' listing.id %}"> {{ listing.title }}{% if watchlist %}{% if listing.owner == request.user %} - You won this item!!{%endif%}{%endif%} </a></h1>
+                    
+                    <h2><strong>£{{listing.starting_price}}</strong></h2>
+                    <p class="subtext">Created on {{listing.date_created}}</p>
+                    <p class="subtext">Posted by {{ listing.listed_by }}
+                </div>
+            </div>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+    
+            <script type="text/javascript">
+                function changeSrc(id) {
+                    document.getElementById(id).src = "../static/missing.png";
+                }
+            </script>
+    {% endblock %}

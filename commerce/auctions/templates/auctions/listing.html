@@ -1,0 +1,135 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+{% block body %}
+    <div class="listing_container">
+        
+        <img id="listing_image" class="listing_container__image" src="{{ listing.url }}" alt="Item Image">
+        <div class="listing_container__text">
+        <h1>{{ listing.title }}</h1>
+    <a class="back" href="{% url 'index' %}"><em><p>(Back home)</p></em></a>
+        
+    {% if listing.description %}
+    <p>{{listing.description}}</p>
+    {% else %}
+    <p>No description given</p>
+    
+    {% endif %}
+   
+    <h2><strong>£{{listing.starting_price}}</strong></h2>
+    
+    {% if listing.active == True %}
+    {% if error|length > 0 %}
+        <p>{{error.0}}</p>
+    {% endif %}
+    {% if user.is_authenticated and listing.listed_by.id != user.id %}
+    <form action="/listing/{{listing.id}}" method="post">
+        {% csrf_token %}
+        {{ bidForm }}
+        <input type="submit" value="Place Bid" id="bid_button">
+    </form>
+    
+    
+    {% else %}
+        {% if listing.listed_by.id != user.id %}
+            
+        <p><a href="{% url 'login' %}">Sign in to place a bid</a></p>
+        {% endif %}
+        {% endif %}
+        <p>{{ length }} bid(s) so far {% if max and listing.listed_by.id == user.id %}(Max bid is £{{ max }}){% endif %}</p>
+        {% else %}
+        {% if listing.owner %}
+            {% if listing.owner == request.user %}<p>Congrats! You won this item!</p>
+            {% else %}<p>{{ listing.owner }} won this item</p>{% endif %}
+            
+        <p>Auction has closed</p>
+        {% endif %}
+        {% endif %}
+     
+     <br>
+    
+
+    <span class="details">
+    <h2>Details:</h2>
+    <ul> 
+        <li>Posted by <a href="{% url 'user' listing.listed_by.id %}">{{ listing.listed_by }}</a></li>
+        <li> {{ listing.date_created }} </li>
+        {% if listing.category %}
+            <li>Category: {{ listing.category }}</li>
+        {% else %}
+            <li>No category given</li>
+    {% endif %}
+    </ul>
+    </span>
+    {% if listing.listed_by.id == user.id and listing.active == True %}    
+    <form action="/listing/{{ listing.id }}" method="post" id="closeForm">
+        {% csrf_token %}
+        {{ closeForm }}
+    <input type="submit" value="Close Listing" id="submitButton">
+    </form>
+    
+    {% endif %}
+    
+    {% if listing.listed_by.id != user.id and listing.active == True and watched == False and user.is_authenticated %}
+    <form action="/listing/{{ listing.id }}" method="post" id="watchForm">
+        {% csrf_token %}
+        {{ watchForm }}
+    <input type="submit" value="Add to Watchlist" id="watchButton">
+    </form>
+    {% endif %}
+    {% if watched %}
+    <form action="/listing/{{ listing.id }}" method="post" id="removeForm">
+        {% csrf_token %}
+        {{ removeForm }}
+        <input type="submit" value="Remove from watchlist">
+    </form>
+    {% endif %}
+    </div>
+    </div>
+    {% if user.is_authenticated %}
+        <br>
+        <form action="/listing/{{ listing.id }}" method="post" id="commentForm">
+            {% csrf_token %}
+            {{ commentForm.as_p }}
+            <input type="submit" value="Post" id="postButton">
+        </form>
+    {% else %}
+    <br>
+        <p>Sign in to make a comment</p>
+    {% endif %}
+    {% if comments %}
+        <p>Comments:</p>
+        <div class="commentContainer">
+        {% for comment in comments %}
+            <div class="comment">
+                <div class="user">
+                    <img id="profilePic" src="{% static 'pp.jpg' %}" width="30" height="30">
+                <a href="{% url 'user' comment.user.id %}">{{comment.user}}</a>
+                </div>
+               <p class="commentContent">{{ comment.comment }}</p>
+               <p class="subtext date">{{ comment.date }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+            <p>No comments yet</p>
+    {% endif %}
+
+
+
+    <script type="text/javascript">
+        const img = document.getElementById('listing_image');
+
+        img.addEventListener('error', function handleError() {
+        img.src = "../static/missing.png";
+    
+        })
+
+        var inputElement = document.getElementById("submitButton")
+        inputElement.addEventListener("click", function() {
+            if (confirm('Do you want to submit?')) {
+                document.getElementById("closeForm").submit()
+            } else {
+                return false;
+            }
+        })
+    </script>
+{% endblock %}
