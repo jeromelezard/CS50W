@@ -1,0 +1,52 @@
+textarea {
+    min-height: 400px;
+    
+}
+#compose-body {
+    white-space: pre-wrap;
+}
+#emailBody {
+    white-space: pre-wrap;
+
+}
+#emails-view {
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+}
+
+.emailContainer {
+    border: 2px solid black;
+    border-bottom: 0;
+    display: flex;
+    padding: 5px;
+    flex: 0 0 auto;
+    cursor: pointer;
+    
+}
+.emailContainer div{
+    display: inline;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+}
+.emailContainer > div:nth-of-type(1){
+    
+    margin-right: 20px;
+    width: 50%;
+    
+}
+.emailContainer > div:nth-of-type(3){
+    text-align: right;
+}
+.emailContainer:last-child{
+    border-bottom: 2px solid black;
+}
+#email-view {
+    font-size: 25px;
+}
+#email-view p{
+    margin: 0;
+}

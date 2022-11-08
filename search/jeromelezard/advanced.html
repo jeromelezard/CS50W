@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Search</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <ul class="nav">
+                <li class="nav-item"> 
+                    <a href="https://about.google.com" class="nav-link text-dark"><img alt="logo" src="logo.png" height="50" width="147"></a>
+                </li>
+                
+                <li class="nav-item ms-auto"> 
+                    <a href="images.html" class="nav-link text-dark">Images</a>
+                </li>
+                <li class="nav-item"> 
+                    <a href="index.html" class="nav-link text-dark">Search</a>
+                </li>
+
+            </ul>
+    </div>
+    <div class="title">
+        <h2>Advanced search</h2>
+    </div>
+    <hr>
+    <p>Find pages with...</p>
+    <form action="https://google.com/search">
+        <div class="container">
+            <div>
+                all of these words:
+            </div>                
+            <div>
+                <input type="text" name="as_q"/>
+            </div>
+            <div>
+                this exact word or phrase:
+            </div>
+            <div>
+                <input type="text" name="as_epq"/>
+            </div>
+            <div>
+                any of these words:
+            </div>
+            <div>
+                <input type="text" name="as_oq"/>
+            </div>
+            <div>
+                none of these words:
+            </div>
+            <div>
+                <input type="text" name="as_eq"/>
+            </div>
+            <div class="i">
+                <input id="advBtn" type="submit" value="Advanced search">
+            </div>
+        </div>
+    </form>
+    </body>
+</html>
+
+<!--
+    
+    search?as_q=query
+    search?as_q=&as_epq=query
+    search?as_q=&as_epq=&as_oq=query
+    search?as_q=&as_epq=&as_oq=&as_eq=query
+-->

@@ -1,0 +1,31 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+Encyclopedia
+{% endblock %}
+
+{% block body %}
+{% if edit %}
+    <h1>Edit Entry</h1>
+{% else %}
+     <h1>Create New Entry</h1>
+     {% endif %}
+
+     {% if existing%}
+
+     <div class="alert alert-danger" role="alert">
+         Entry already exists
+     </div>
+     {% endif %}
+     <div class="form-group">
+         {% if edit %}
+            <form  action="edit" method="post">
+        {% else %}
+     <form  action="{% url 'newEntry' %}" method="post">
+         {% endif %}
+         {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit">
+     </form>
+     </div>
+{% endblock %}

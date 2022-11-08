@@ -1,0 +1,185 @@
+* {
+    box-sizing: border-box;
+}
+p {
+    margin: 0;
+}
+.postContent {
+    padding: 5px;
+    background-color: #f8f9fa;
+    width: 100%;
+    border: none;
+    resize: none;
+    outline: none;
+    font-size: 25px;
+    height: 50px;
+    overflow: hidden;
+    white-space: pre-wrap;
+}
+
+
+.postContent:active {
+    border: none;
+}
+.newPostForm {
+    width: 100%;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    /*box-shadow: 0px 4px 7px 0px rgba(0,0,0,0.4);*/
+    margin-bottom: 10px;
+}
+
+.allPosts {
+    display: flex;
+    flex-direction: column;
+}
+.post {
+    width: 100%;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    margin: 10px 0px;
+    padding: 20px;
+}
+#time {
+    margin-left: 5px;
+}
+.profilePicDiv {
+    
+    float: left;
+    float: top;
+}
+.postData {
+    overflow: hidden;
+    padding-left: 10px;
+    word-wrap: break-word;
+    position: relative;
+}
+.edit {
+    width: 1.25rem;
+    
+    position:absolute;
+    top:0;
+    right:0;
+    cursor: pointer;
+    
+}
+
+.subtext {
+    font-size: 1em;
+    color: grey;
+}
+
+.unlike {
+    fill: red;              
+    width: 1.25rem;
+    stroke-width: 1.5px;
+                        
+}
+.unlike:hover {
+    cursor: pointer;
+    
+}
+.like {
+    fill: white;              
+    width: 1.25rem;
+    stroke-width: 1.5px;
+    stroke: black;
+                        
+}
+.like:hover {
+    cursor: pointer;
+    
+}
+.content {
+    overflow: hidden;
+    white-space: pre-wrap;
+}
+
+.hidden {
+    display: none;
+}
+.editBox {
+    padding: 5px;
+    
+    width: 100%;
+    border-radius: 10px;
+    resize: none;
+    height: 80px;
+    white-space: pre-wrap;
+}
+.userHeading {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-right: 10px;
+    
+}
+.profileHeading {
+    display: flex;
+    flex-direction: row;
+}
+
+.followButton {
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 2vh;
+    font-weight: bold;
+    padding: 5px 20px;
+    width: 130px;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    text-align: center;
+    color: rgb(139, 139, 139);
+    height: 44px;
+    margin-top: 20px;
+
+    transition-property: background-color, transform;
+    transition-timing-function: ease-out;
+    transition-duration: 0.1s;
+}
+
+.followButton:hover,
+.followButton:focus{
+    background: #f8f9fa;
+  }
+.followButton:active {
+    transform: translateY(0) scale(0.95);
+}
+.followLink {
+    color: black
+}
+
+.dropdown {  
+    display: inline-block;
+    position:absolute;
+    top:0;
+    right:0;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    
+    background-color: #f1f1f1;
+    min-width: 160px;
+    height:160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    
+  }
+
+  .dropdown-content p {
+    color: black;
+    padding: 12px 16px;
+    
+    display: block;
+    cursor: pointer;
+  }
+
+  .dropdown-content p:hover {background-color: #ddd}
+
+  /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+  .show {display:block;}
